@@ -1,5 +1,5 @@
 import React from 'react';
-import MasterLayout from './MasterLayout';
+import MasterLayout from '../components/MasterLayout';
 
 const PageNotFound = () => {
     return (
@@ -11,7 +11,6 @@ const PageNotFound = () => {
                     </div>
                 </div>
             </div>
-            
         </MasterLayout>
     );
 };

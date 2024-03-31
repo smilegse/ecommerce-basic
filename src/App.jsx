@@ -3,11 +3,12 @@ import LoginPage from './pages/LoginPage';
 import VerifyLoginPage from './pages/VerifyLoginPage';
 import CartListPage from './pages/CartListPage';
 import ProductListPage from './pages/ProductListPage';
-// import PageNotFound from "./pages/PageNotFound";
+import PageNotFound from "./pages/PageNotFound";
+import Helper from "./utility/Helper";
 
 function App() {
 
-  if(isLogin()){
+  if(Helper.isLogin()){
     return (
       <BrowserRouter>
         <Routes>
@@ -17,7 +18,8 @@ function App() {
         </Routes>
       </BrowserRouter>
     );
-  }else{
+  }
+  else{
     return (
       <BrowserRouter>
         <Routes>

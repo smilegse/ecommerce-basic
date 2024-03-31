@@ -1,12 +1,12 @@
 import React from 'react';
 import {Container, Nav, Navbar} from "react-bootstrap";
 import Helper from "../utility/Helper.js";
-import {NavLink} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import logo from "../assets/image/logo.png";
 
 const AppNavBar = () => {
     return (
-        <Navbar expand="lg" className="bg-body-tertiary bg-white shadow">
+        <Navbar expand="lg" className="bg-body-tertiary bg-white shadow fixed-top">
             <Container fluid>
                 <Navbar.Brand href="#"> <img alt="" className="nav-logo" src={logo}/>
                 </Navbar.Brand>
@@ -19,11 +19,10 @@ const AppNavBar = () => {
                             <NavLink className="nav-link" to="/cart-list">Cart List</NavLink>
                         }
                     </Nav>
-
                     {
                         Helper.isLogin()?(
                             <button className="btn btn-danger">Logout</button>
-                        ): (<button className="btn btn-danger">Login</button>)
+                        ): (<Link className="btn btn-danger" to="/login">Login</Link>)
                     }
 
                 </Navbar.Collapse>
