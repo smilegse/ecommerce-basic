@@ -1,9 +1,10 @@
 import MasterLayout from "../components/MasterLayout";
+import VerifyLoginForm from "../components/VerifyLoginForm";
 
 const VerifyLoginPage = () => {
     return (
         <MasterLayout>
-            <h1>VerifyLoginPage</h1>
+            <VerifyLoginForm/>
         </MasterLayout>
     );
 };

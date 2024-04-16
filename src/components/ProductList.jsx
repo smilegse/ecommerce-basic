@@ -3,9 +3,11 @@ import { useState } from "react";
 import Helper from "../utility/Helper";
 import { useEffect } from "react";
 import FullScreenLoader from "./FullScreenLoader";
+import toast from "react-hot-toast";
 
 const ProductList = () => {
     let [data,setData] = useState(null);
+    let [loader, setLoader] = useState(false);
 
     useEffect(()=>{
         (async()=>{
@@ -20,15 +22,34 @@ const ProductList = () => {
 
     }
 
+    const addToCart = async(id)=>{
+        try {
+            setLoader(true);
+            let res = await axios.get(`${Helper.API_BASE}/create-cart/${id}`,Helper.tokenHeader());
+            setLoader(false);
+            //debugger;
+            if(res.data['msg'] === 'success'){
+                toast.success('Product added to Cart');
+            }else{
+                toast.error('Request failed!');
+            }
+        } catch (e) {
+            //debugger;
+            Helper.Unauthorized(e.response.status)
+        }
+        
+
+    }
+
     return (
         <div>
-            {data===null?(<FullScreenLoader/>) : (
+            {data === null || loader?(<FullScreenLoader/>) : (
                 <div className="container pt-5">
                     <div className="row">
                         {
                             data.map((item,data)=>{
                                 return(
-                                    <div className="col-md-3 mt-5">
+                                    <div key={item['id']} className="col-md-3 mt-5">
                                         <div className="card p-3">
                                             <img className="w-100" src={item['image']} alt='card'/>
                                             <h5>Price Tk: 
@@ -37,6 +58,7 @@ const ProductList = () => {
                                                 )}
                                             </h5>
                                             <p>{item['title']}</p> 
+                                            <button onClick={async()=>{await addToCart(item['id'])}} className="btn btn-outline-danger btn-sm">Add to Cart</button>
                                         </div>
                                     </div>
                                 )
